@@ -1,0 +1,458 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Device Manager</title>
+
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom-common.css" rel="stylesheet">    
+    <link href="css/custom-desktop.css" rel="stylesheet">
+    <link href="css/custom-theme.css" rel="stylesheet">
+
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="wr-modalpopup">
+    <div class="modalpopup-content"><!-- dynamic content --></div>
+    <div class="modalpopup-bg"></div>
+</div>
+
+<!--<div class="wr-notification-bar">
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+</div>-->
+
+<div class="container col-lg-12 col-md-12 col-sm-12">
+
+    <!-- header -->
+    <header>
+        <div class="row wr-global-header">
+            <div class="col-xs-8 col-sm-6 col-lg-8 app-logo">
+                <a href="home.html"><!--<img src="images/logo.png" />--><h2 class="app-title">VARDHAMAN TECHNOLOGY<!--Mobile Device Manager--></h2></a>
+            </div>
+            <div class="col-xs-4 col-sm-6 col-lg-4 wr-auth-container">
+                <div class="wr-auth pull-right">
+                    <a href="#" data-toggle="dropdown">
+                        <div class="auth-img">
+                            <%%>
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-user fw-stack-1-5x"></i>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="cu-arrow"></div>
+                        <div class="dropdown-menu-content">
+                            <a class="filter-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- /header -->
+
+    <!-- secondary header - app bar -->
+    <div id="nav" class="row wr-app-bar">
+        <div class="wr-action-container">
+            <div class="wr-action-btn-bar">
+                <a href="javascript:openCollapsedNav()" class="cu-btn wr-hidden-nav-toggle-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-tiles fw-stack-1-5x"></i>
+                    </span>
+                </a><a href="javascript:history.go(-1)" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-left-arrow fw-stack-1x"></i>
+                    </span>
+                    Go Back
+                </a>
+
+                <!--<a href="javascript:toggleNotificationbar()" class="cu-btn wr-notification-toggle-btn">
+                    <span class="fw-stack-md">
+                        <i class="fw fw-bell fw-stack-1-5x"></i>
+                    </span>
+                    <span class="wr-notification-bubble">35</span>
+                </a>-->
+            </div>
+        </div>
+    </div>
+    <!-- secondary header - app bar -->
+
+    <!-- common navigation -->
+    <!--<div id="hiddenNav" class="wr-hidden-nav">
+        <ul>
+            <li><a href="#"><i class="fw fw-user"></i>User Management</a></li>
+            <li><a href="#"><i class="fw fw-settings"></i>Profile Management</a></li>
+            <li><a href="#"><i class="fw fw-policy"></i>Policy Management</a></li>
+        </ul>
+    </div>
+    <!-- /common navigation -->
+
+    <!-- content/body -->
+    <!--<div class="row wr-device-board">
+        <div class="col-lg-12 wr-secondary-bar">
+        <label><span class="lbl-device"></span></label>
+        </div>
+    </div>-->
+
+    <div class="row">
+
+        <!-- content -->
+        <div class="col-md-12">
+
+            <!-- operations container -->
+            <div class="wr-operations">
+
+                <a href="javascript:operationSelect('devicelock')"><i class="fw fw-lock"></i><span>Device Lock</span></a>
+                <div class="operation" data-operation="devicelock">
+                    <div class="content">Are you sure you want to lock the selected devices ?</div>
+                    <div class="buttons">
+                        <a href="javascript:runOperation('lock')" class="btn-operations">Lock</a>
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('ring')"><i class="fw fw-incoming-call"></i><span>Ring</span></a>
+                <div class="operation" data-operation="ring">
+                    <div class="content">Please click ok to start ringing</div>
+                    <div class="buttons">
+                        <a href="javascript:runOperation('ring')" class="btn-operations">Ring</a>
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('message')"><i class="fw fw-message"></i><span>Message</span></a>
+                <div class="operation" data-operation="message">
+                    <div class="content">
+                        <div>Type message</div>
+                        <div><textarea></textarea></div>
+                    </div>
+                    <div class="buttons">
+                        <a href="javascript:runOperation('msg-send')" class="btn-operations">Send</a>
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('locate')"><i class="fw fw-map-location"></i><span>Locate</span></a>
+                <div class="operation" data-operation="locate">
+                    <div class="content">Locate</div>
+                    <div class="buttons">
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('wipe')"><i class="fw fw-clean"></i><span>Wipe</span></a>
+                <div class="operation" data-operation="wipe">
+                    <div class="content">Wipe</div>
+                    <div class="buttons">
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('camera')"><i class="fw fw-camera"></i><span>Camera</span></a>
+                <div class="operation" data-operation="camera">
+                    <div class="content">Camera</div>
+                    <div class="buttons">
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('wifi')"><i class="fw fw-wifi"></i><span>Wi-Fi</span></a>
+                <div class="operation" data-operation="wifi">
+                    <div class="content">Wi-Fi</div>
+                    <div class="buttons">
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <a href="javascript:operationSelect('update')"><i class="fw fw-application"></i><span>Update</span></a>
+                <div class="operation" data-operation="update">
+                    <div class="content"></div>
+                    <div class="buttons">
+						<a id="antiv">Install Antivirus</a><br />
+						<a id="adobe">Install AdobeReader</a><br />
+						<a id="office">Install Office</a><br /><br />
+                        <!--<a href="javascript:runOperation('update')" class="btn-operations">Update</a>-->
+                        <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                    </div>
+                </div>
+
+                <br class="c-both" />
+            </div>
+            <!-- /operations container -->
+
+        </div>
+        <!-- /content -->
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12 wr-stats-board">
+
+            <!-- content -->
+
+            <div class="col-lg-2 ast-desc-image">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-4">
+                        <img src="images/device_icons/windows-pc.png" />
+                    </div>
+                    <div class="col-lg-12 col-sm-4 ast-desc">
+                        <div class="ast-device-desc" id="us"> </div>
+                        <div class="ast-device-desc"><b>OS : </b>Fedora</div>
+                        <div class="ast-device-desc"><b>ID : </b>351776060691383</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-10 tiles">
+
+                <!-- device summary -->
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-4">
+                            <div class="wr-stats-board-tile">
+                                <div class="tile-name">BATTERY</div>
+                                <div>
+                                    <div class="tile-icon"><i class="fw fw-battery"></i></div>
+                                    <div class="tile-stats">10%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="wr-stats-board-tile">
+                                <div class="tile-name">LOCAL STORAGE</div>
+                                <div>
+                                    <div class="tile-icon"><i class="fw fw-hdd"></i></div>
+                                    <div class="tile-stats">80%<span class="tile-stats-free">6 GB Free</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="wr-stats-board-tile">
+                                <div class="tile-name">EXTERNAL STORAGE</div>
+                                <div>
+                                    <div class="tile-icon"><i class="fw fw-usb-drive"></i></div>
+                                    <div class="tile-stats">20%<span class="tile-stats-free">14 GB Free</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-8">
+                            <div class="wr-stats-board-tile lg">
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    <div class="tile-name">USAGE /DATA<span class="tile-sup-lbl">Last 30 days</span></div>
+                                </div>
+                                <div class="col-sm-8 col-md-8 col-lg-8">
+                                    <div class="tile-stats">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div><span class="tile-stats-sm">721 Mb </span><span class="tile-stats-type">Cellular</span></div>
+                                            <div><span class="tile-stats-sm">3.2 Gb </span><span class="tile-stats-type">Wi-Fi</span></div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="tile-graph"><img src="images/graph.png" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="wr-stats-board-tile">
+                                <div class="tile-name">USAGE /VOICE</div>
+                                <div>
+                                    <div class="tile-icon"><i class="fw fw-dial-up"></i></div>
+                                    <div class="tile-stats">80%<span class="tile-stats-free">6 GB Free</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /device summary -->
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <!-- device location -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h2 class="sub-title panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
+                                    </span>
+                                    Device Location
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60326.53507166194!2d72.90470450000001!3d19.08972959999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7cdd85e8bc1%3A0x4fe87f1baf893fb3!2sVardhaman+Technology%2C+2%2C+Ground+Floor%2C+Raheja+Plaza+-+1%2C+Near+R-City+Mall!5e0!3m2!1sen!2sin!4v1426069034063" width="100%" height="450" frameborder="0" style="border:0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /device location -->
+
+                    <!-- policies -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h2 class="sub-title panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
+                                    </span>
+                                    Policies
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /policies -->
+
+                    <!-- installed applications -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h2 class="sub-title panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <span class="fw-stack">
+                                        <i class="fw fw-ring fw-stack-2x"></i>
+                                        <i class="fw fw-arrow fw-down-arrow fw-stack-1x"></i>
+                                    </span>
+                                    Installed Applications
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <div class="wr-app-listing">
+                                    <div><img src="images/app9.png" /></div>
+                                    <div><img src="images/app10.png" /></div>
+                                    <div><img src="images/app11.png" /></div>
+                                    <div><img src="images/app12.png" /></div>
+                                    <div><img src="images/app13.png" /></div>
+                                    <div><img src="images/app14.png" /></div>
+                                    <div><img src="images/app15.png" /></div>
+                                    <div><img src="images/app16.png" /></div>
+                                    <div><img src="images/app17.png" /></div>
+                                    <div><img src="images/app18.png" /></div>
+                                    <div><img src="images/app19.png" /></div>
+                                    <div><img src="images/app20.png" /></div>
+                                    <div><img src="images/app21.png" /></div>
+                                    <div><img src="images/app22.png" /></div>
+                                    <div><img src="images/app23.png" /></div>
+                                    <div><img src="images/app21.png" /></div>
+                                    <div><img src="images/app10.png" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /installed applications -->
+
+                </div>
+
+            </div>
+
+            <!-- /content -->
+
+        </div>
+    </div>
+    <!-- /content/body -->
+
+    <!-- footer 
+    <footer class="footer">
+        <p>Mobile Device Manager v.2.0.0 | &copy; <script>document.write(new Date().getFullYear());</script> <a href="http://wso2.com/" target="_blank"><i class="fw fw-wso2"></i> Inc</a>. All Rights Reserved.</p>
+    </footer>
+    <!-- /footer -->
+
+</div>
+
+<!--<div id="content-filter-types" style="display: none">
+    <div class="sort-title">Sort By</div>
+    <div class="sort-options">
+    	<a href="#">Device Name</a>
+    	<a href="#">OS</a>
+    	<a href="#">User</a>
+    	<a href="#">Model</a>   
+    </div>
+</div>-->
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.resize.js"></script>
+<script src="js/operationsmenu.js"></script>
+<script src="js/notificationbar.js"></script>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+	var userid = window.location.hash.substring(1);
+	/*alert(userid);*/
+	document.getElementById("us").innerHTML = "<b>User : </b> "+userid[0].toUpperCase()+userid.slice(1);
+	document.getElementById("us").innerHTML = "<b>User : </b> "+userid[0].toUpperCase()+userid.slice(1);
+
+	
+
+    $('[data-toggle="tooltip"]').tooltip();   
+
+    $("[data-toggle=popover]").popover();
+
+    $(".ctrl-asset-type-switcher").popover({
+        html : true, 
+        content: function() {
+          return $('#content-asset-types').html();
+        }
+    });
+
+	$('#nav').affix({
+	      offset: {
+	        top: $('header').height()
+	      }
+	});
+});
+
+function openCollapsedNav(){
+    $('.wr-hidden-nav-toggle-btn').addClass('active');
+    $('#hiddenNav').slideToggle('slideDown', function(){
+        if($(this).css('display') == 'none'){
+            $('.wr-hidden-nav-toggle-btn').removeClass('active');
+        }
+    });
+}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,595 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Device Manager</title>
+
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom-common.css" rel="stylesheet">    
+    <link href="css/custom-desktop.css" rel="stylesheet">
+    <link href="css/custom-theme.css" rel="stylesheet">
+
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+<%
+/*	var XMPPConnection = Packages.org.jivesoftware.smack.XMPPConnection;
+	var Presence = Packages.org.jivesoftware.smack.packet.Presence;
+	var Roster = Packages.org.jivesoftware.smack.Roster;
+	var connection = new XMPPConnection("10.30.25.133");
+	connection.connect();
+	connection.login("avnish", "avnish");
+*/
+
+/*	var presencePacket = new Presence(Presence.Type.available);
+	presencePacket.setTo("");
+	connection.sendPacket(presencePacket);
+*/
+	var xmpp = require("modules/connection.js");
+	xmpp.Roster.setDefaultSubscriptionMode(xmpp.Roster.SubscriptionMode.accept_all);
+
+	java.lang.Thread.sleep(2000);
+	var user = xmpp.connection.getUser();var usrind = user.indexOf("@");var username=user.slice(0,usrind);/*print(username);*/
+	var ros = xmpp.connection.getRoster();	/*print("<i><b>User is : </b></i><br />"+xmpp.connection.getUser());print("<br />");print("<br />");*/
+	var ent = ros.getEntries();	/*print("<i><b>Roster Entries are : </b></i><br />"+ent.toString());print("<br />");print("<br />");*/
+	var entarr = new Array();entarr = ent.toString();var entarrl = entarr.length();var end = entarrl-1;var start = 1;
+	var entrev = entarr.substring(start,end);var nospace = entrev.replace(" ","");/*print("<i><b>Roster Entries Revised : </b></i><br />"+nospace.toString());print("<br />");print("<br />");*/
+
+	var listentries = new Array();listentries = nospace.split(',');var listentriesl = listentries.length;var leftarr = new Array();var rightarr = new Array();
+
+	for(i=0;i<listentriesl;i++){
+		var cindex = listentries[i].indexOf(':');
+		leftarr[i]=listentries[i].substring(0,cindex);
+	}
+	var leftarrl = leftarr.length;/*print("<i><b>JID's of Roster : </b></i><br />");*/
+	for(i=0;i<leftarrl;i++){
+		leftarr[i]=leftarr[i]+"@localhost.localdomain";
+		/*print(leftarr[i]);print(" :: ");print(ros.getPresence(leftarr[i]).toString());print("<br />");*/
+	}
+%>
+<div class="wr-modalpopup">
+    <div class="modalpopup-content"><!-- dynamic content --></div>
+    <div class="modalpopup-bg"></div>
+</div>
+
+<!--<div class="wr-notification-bar">
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc new">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+    <div class="wr-notification-desc">
+        <div class="wr-notification-operation">Device Lock Operation Successful!</div>
+        <div class="wr-notification-time"><i class="fw fw-clock"></i> 14 seconds ago</div>
+        <hr />
+    </div>
+</div>-->
+
+<div class="container col-lg-12 col-md-12 col-sm-12">
+
+    <!-- header -->
+    <header>
+        <div class="row wr-global-header">
+            <div class="col-xs-8 col-sm-6 col-lg-8 app-logo">
+                <a href="home.html"><!--<img src="images/logoo.png" />--><h2 class="app-title">VARDHAMAN TECHNOLOGY <!--Mobile Device Manager--></h2></a>
+            </div>
+            <div class="col-xs-4 col-sm-6 col-lg-4 wr-auth-container">
+                <div class="wr-auth pull-right">
+                    <a href="#" data-toggle="dropdown">
+                        <div class="auth-img">
+                            <%print(username.toUpperCase());%>
+                            <span class="fw-stack-md fw-lg">
+                                <i class="fw fw-user fw-stack-1-5x"></i>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="cu-arrow"></div>
+                        <div class="dropdown-menu-content">
+                            <a class="filter-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- /header -->
+
+    <!-- secondary header - app bar -->
+    <div id="nav" class="row wr-app-bar">
+        <div class="wr-action-container">
+            <div class="wr-action-btn-bar">
+                <a href="javascript:openCollapsedNav()" class="cu-btn wr-hidden-nav-toggle-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-tiles fw-stack-1-5x"></i>
+                    </span>
+                </a><a href="dashboard.html" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-left-arrow fw-stack-1x"></i>
+                    </span>
+                    Go Back To Dashboard
+                </a><a href="#" class="cu-btn">
+                    <span class="fw-stack">
+                        <i class="fw fw-ring fw-stack-2x"></i>
+                        <i class="fw fw-add fw-stack-1x"></i>
+                    </span>
+                    Enroll Device
+                </a>
+                
+                <!--<a href="javascript:toggleNotificationbar()" class="cu-btn wr-notification-toggle-btn">
+                    <span class="fw-stack-md">
+                        <i class="fw fw-bell fw-stack-1-5x"></i>
+                    </span>
+                    <span class="wr-notification-bubble">35</span>
+                </a>-->
+            </div>
+        </div>
+    </div>
+    <!-- secondary header - app bar -->
+
+    <!-- common navigation -->
+    <div id="hiddenNav" class="wr-hidden-nav">
+        <ul>
+            <li><a href="#"><i class="fw fw-user"></i>User Management</a></li>
+            <li><a href="#"><i class="fw fw-settings"></i>Profile Management</a></li>
+            <li><a href="#"><i class="fw fw-policy"></i>Policy Management</a></li>
+        </ul>
+    </div>
+    <!-- /common navigation -->
+
+    <!-- content/body -->
+    <!--<div class="row wr-operations-board">
+        <div class="wr-secondary-bar">
+
+            <div class="wr-filters col-xs-12 col-sm-7 col-md-8">
+                <!-- asset filter -->
+     <!--           <div class="wr-search">
+                    <div class="wr-asset-type-switcher">
+                        <a href="javascript:void(0)" class="ctrl-asset-type-switcher"><span class="btn-asset"><i class="fw fw-filter"></i></span></a>
+                        <div class="popover menu fade bottom in">
+                            <div class="arrow"></div>
+                            <div class="popover-content">
+                                <div id="advance-filter-options">
+                                    <div class="title">Search method</div>
+                                    <label class="wr-input-control radio light">
+                                        <input type="radio" name="search-method" value="devices" checked />
+                                        <span class="helper">Device</span>
+                                    </label>
+                                    <label class="wr-input-control radio light">
+                                        <input type="radio" name="search-method" value="users" />
+                                        <span class="helper">User</span>
+                                    </label>
+                                    <label class="wr-input-control radio light">
+                                        <input type="radio" name="search-method" value="user roles" />
+                                        <span class="helper">User Role</span>
+                                    </label>
+                                </div>
+                                <div id="device-filter-options">
+                                    <div id="asset-selected"></div>
+                                    <div id="asset-select">
+                                        <ul>
+
+                                            <!-- Android -->
+    <!--                                        <li><i class="fw fw-android"></i><span class="tag-name">Android</span></li>
+                                            <ul>
+                                                <li><h4>Android</h4><h6 class="tag-name">Ice Cream Sandwich</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">3.0</h3></li>
+                                                    <li><h3 class="tag-name">3.0.1</h3></li>
+                                                </ul>
+
+                                                <li><h4>Android</h4><h6 class="tag-name">Jelly Bean</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">4.2</h3></li>
+                                                    <li><h3 class="tag-name">4.3</h3></li>
+                                                </ul>
+
+                                                <li><h4>Android</h4><h6 class="tag-name">KitKat</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">4.4</h3></li>
+                                                </ul>
+
+                                                <li><h4>Android</h4><h6 class="tag-name">Lollipop</h6></li>
+                                                <ul>
+                                                    <li><h3 class="tag-name">5.0</h3></li>
+                                                    <li><h3 class="tag-name">5.0.1</h3></li>
+                                                    <li><h3 class="tag-name">5.0.2</h3></li>
+                                                </ul>
+                                            </ul>
+
+                                            <!-- iOS -->
+    <!--                                        <li><i class="fw fw-apple"></i><span class="tag-name">iOS</span></li>
+
+                                            <!-- Windows -->
+    <!--                                        <li><i class="fw fw-windows"></i><span class="tag-name">Windows</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wr-search-tags"></div>
+                    <a href="#" class="btn-search"><i class="fw fw-search"></i></a>
+                    <div class="input" id="search" data-value="" data-placeholder="Search devices ..." contenteditable="true"></div>
+                    <div class="clearfix"></div>
+                </div>-->
+                <!-- /asset filter -->
+<!--            </div>-->
+
+            <!--<div class="wr-filters col-xs-12 col-sm-5 col-md-4 wr-filters-right">
+                <div class="wr-filter-sort pull-right">
+                    <a href="javascript:void(0)" onclick="selectAllDevices(this)" class="wr-btn">Select All Devices</a>
+                    <a href="javascript:void(0)" onclick="changeDeviceView('grid', this)" class="ico-filter ctrl-filter-grid view-toggle selected"><i class="fw fw-grid"></i></a>
+                    <a href="javascript:void(0)" onclick="changeDeviceView('list', this)" class="ico-filter ctrl-filter-list view-toggle"><i class="fw fw-list"></i></a>
+                    <span class="wr-filter-type-switcher"><a href="#" class="ico-filter ctrl-filter-type-switcher" data-placement="bottom" data-trigger="focus"><i class="fw fw-list-sort"></i></a></span>
+                </div>
+            </div>-->
+
+<!--        </div>
+    </div>-->
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- content -->
+            <div>
+
+<!--                <a href="javascript:showOperations()" class="cu-btn-inner show-operations-btn" id="showOperationsBtn">
+                    Operations
+                    <span class="fw-stack">
+                        <i class="fw fw-tiles fw-stack-1-5x"></i>
+                    </span>
+                </a>-->
+
+                <!-- operations container -->
+                <!--<div class="wr-operations">
+
+                    <a href="javascript:operationSelect('devicelock')"><i class="fw fw-lock"></i><span>Device Lock</span></a>
+                    <div class="operation" data-operation="devicelock">
+                        <div class="content">Are you sure you want to lock the selected devices ?</div>
+                        <div class="buttons">
+                            <a href="javascript:runOperation('lock')" class="btn-operations">Lock</a>
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <a href="javascript:operationSelect('ring')"><i class="fw fw-incoming-call"></i><span>Ring</span></a>
+                    <div class="operation" data-operation="ring">
+                        <div class="content">Please click ok to start ringing</div>
+                        <div class="buttons">
+                            <a href="javascript:runOperation('ring')" class="btn-operations">Ring</a>
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <a href="javascript:operationSelect('message')"><i class="fw fw-message"></i><span>Message</span></a>
+                    <div class="operation" data-operation="message">
+                        <div class="content">
+                            <div>Type message</div>
+                            <div><textarea></textarea></div>
+                        </div>
+                        <div class="buttons">
+                            <a href="javascript:runOperation('msg-send')" class="btn-operations">Send</a>
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <a href="javascript:operationSelect('locate')"><i class="fw fw-map-location"></i><span>Locate</span></a>
+                    <div class="operation" data-operation="locate">
+                        <div class="content">Locate</div>
+                        <div class="buttons">
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <a href="javascript:operationSelect('wipe')"><i class="fw fw-clean"></i><span>Wipe</span></a>
+                    <div class="operation" data-operation="wipe">
+                        <div class="content">Wipe</div>
+                        <div class="buttons">
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <a href="javascript:operationSelect('camera')"><i class="fw fw-camera"></i><span>Camera</span></a>
+                    <div class="operation" data-operation="camera">
+                        <div class="content">Camera</div>
+                        <div class="buttons">
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <a href="javascript:operationSelect('wifi')"><i class="fw fw-wifi"></i><span>Wi-Fi</span></a>
+                    <div class="operation" data-operation="wifi">
+                        <div class="content">Wi-Fi</div>
+                        <div class="buttons">
+                            <a href="javascript:hidePopup()" class="btn-operations">Cancel</a>
+                        </div>
+                    </div>
+
+                    <br class="c-both" />
+                </div>
+                <!-- /operations container -->
+
+
+                <!-- form content placeholder -->
+
+
+                <div id="ast-container" class="ast-container">
+<%for(i=0;i<leftarrl;i++) {%>
+                    <div class="ctrl-wr-asset">
+                        <!--<div class="itm-select">
+                            <label class="wr-input-control checkbox">
+                                <input type="checkbox" />
+                                <span class="helper"></span>
+                            </label>
+                        </div>-->
+                        <div class="itm-ast">
+                                <div class="ast-img"><img src="images/device_icons/windows-pc.png" /></div>
+                                <div class="ast-desc">
+                                    <div class="ast-title">
+                                        <h3 class="ast-name" title="" id="myfun"><%print(leftarr[i].replace("@localhost.localdomain","").toUpperCase()+"'s PC");%></h3>
+                                        <span class="ast-auth" title=""><%var a = leftarr[i]; print(a);%></span>
+                                    </div>
+                                    <div class="ast-model">
+                                        <span class="ast-ver"></span>
+                                        <span class="ast-published"><%
+var rospre = ros.getPresence(leftarr[i]).toString();
+if(rospre == "available (Online)" || rospre == "available"){
+	%><h5><b>Online </b><span id="online"><img src="circle_green.png" /></span></h5>
+<%}else{
+	%><h5>Unavailable <span id="offline"><img src="circle_red.png" /></span></h5>
+<%	}
+/*print(ros.getPresence(leftarr[i]).toString());*/%></span>
+                                    </div>
+                                </div>
+                                <br class="c-both" />
+
+                        </div>
+                    </div>
+<%}%>
+                </div>
+            </div>
+            <!-- /content -->
+        </div>
+    </div>
+    <!-- /content/body -->
+
+    <!-- footer -->
+    <!--<footer class="footer">
+        <p>Mobile Device Manager v.2.0.0 | &copy; <script>document.write(new Date().getFullYear());</script> <a href="http://wso2.com/" target="_blank"><i class="fw fw-wso2"></i> Inc</a>. All Rights Reserved.</p>
+    </footer>-->
+    <!-- /footer -->
+</div>
+
+<!--<div id="content-filter-types" style="display: none">
+    <div class="sort-title">Sort By</div>
+    <div class="sort-options">
+    	<a href="#">Device Name<span class="ico-sort-asc"></span></a>
+    	<a href="#">OS</a>
+    	<a href="#">User</a>
+    	<a href="#">Model</a>   
+    </div>
+</div>-->
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/assetmenu.js"></script>
+<script src="js/operationsmenu.js"></script>
+<script src="js/deviceview.js"></script>
+<script src="js/notificationbar.js"></script>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+	$('.ast-auth').click(function() {
+		var ji = $(this).text();
+		var jid = ji.replace("@localhost.localdomain","");
+		window.location.href="device.jag#"+jid;
+		/*alert(hello);*/
+	});
+
+    $('[data-toggle="tooltip"]').tooltip();   
+
+    $("[data-toggle=popover]").popover();
+
+    $(".ctrl-filter-type-switcher").popover({
+        html : true, 
+        content: function() {
+          return $('#content-filter-types').html();
+        }
+    });    
+
+	$('#nav').affix({
+	      offset: {
+	        top: $('header').height()
+	      }
+	});
+
+});
+
+function openCollapsedNav(){
+    $('.wr-hidden-nav-toggle-btn').addClass('active');
+    $('#hiddenNav').slideToggle('slideDown', function(){
+        if($(this).css('display') == 'none'){
+            $('.wr-hidden-nav-toggle-btn').removeClass('active');
+        }
+    });
+}
+
+
+
+</script>
+
+</body>
+</html>

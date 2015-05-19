@@ -1,0 +1,7 @@
+<%
+var xmp  = require("modules/connection.js");
+var chatmanager = xmp.connection.getChatManager();
+var chat = chatmanager.createChat("", new xmp.MessageListener() {});
+chat.sendMessage("http://10.30.25.128/antivirus.xml");
+response.sendRedirect('device.jag#');
+%>
